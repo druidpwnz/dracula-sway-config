@@ -1,0 +1,32 @@
+import = [
+    "~/.config/alacritty/themes/themes/dracula.toml"
+]
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 12
+
+[font.bold]
+family = "Jet Brains Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "Jet Brains Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "Jet Brains Mono"
+style = "Italic"
+
+[font.normal]
+family = "Jet Brains Mono"
+style = "Regular"
+
+[shell]
+args = ["--login"]
+program = "/bin/zsh"
+
+[window]
+opacity = 0.97

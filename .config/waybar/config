@@ -1,0 +1,40 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 24,
+  "spacing": 4,
+  "modules-left": [
+    "sway/workspaces",
+  ],
+  "modules-center": [
+    "sway/window"
+  ],
+  "modules-right": [
+    "tray",
+    "sway/language",
+    "pulseaudio",
+    "clock"
+  ],
+  "sway/window": {
+    "max-length": 128
+  },
+
+  "clock": {
+    "format-alt": "{:%Y-%m-%d %H:%M}"
+  },
+
+  "tray": {
+    "spacing": 4
+  },
+  "custom/weather": {
+    "exec": "~/.config/waybar/wittr.sh",
+    "return-type": "json",
+    "format": "{}",
+    "tooltip": true,
+    "interval": 900
+  },
+  "pulseaudio": {
+    "on-click": "pavucontrol"
+  },
+
+}
