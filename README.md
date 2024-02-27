@@ -1,1 +1,1 @@
-dracula theme sway waybar wofi dunst nvim config
+dracula theme sway waybar wofi dunst alacritty nvim config
