@@ -25,7 +25,6 @@ set $menu wofi --show drun
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /home/druidpwnz/Pictures/mwlssz097tla1.jpg fill
-#output * bg #000000 solid_color
 #
 # Example configuration:
 #
@@ -33,51 +32,93 @@ output * bg /home/druidpwnz/Pictures/mwlssz097tla1.jpg fill
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
+# Monitors configuration
+workspace 1 output HDMI-A-1
+workspace 2 output HDMI-A-1
+workspace 3 output HDMI-A-1
+workspace 4 output HDMI-A-1
+workspace 5 output HDMI-A-1
+workspace 6 output HDMI-A-1
+workspace 7 output HDMI-A-1
+workspace 8 output HDMI-A-1
+workspace 9 output HDMI-A-1
+workspace 10 output eDP-1
+
 # User configuration
+# Font config
 font pango:JetBrains Mono 11
 
+# Autostart
+exec nm-applet
+exec blueman-applet
+
+# Enable autotiling (needs autotiling sway file from github)
 exec_always autotiling
-# exec --no-startup-id setxkbmap "us,ru,ua" ",winkeys" "grp:alt_shift_toggle,grp_led:scroll"
-# exec --no-startup-id flameshot
-# exec --no-startup-id blueman
-# exec --no-startup-id telegram-desktop
-# exec --no-startup-id spotify
-# exec --no-startup-id nm-applet
+
+# Apply GTK theme settings beside gnome 
+exec_always gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
+exec_always gsettings set org.gnome.desktop.interface icon-theme "Papirus"
+exec_always gsettings set org.gnome.desktop.interface font-name "JetBrains Mono 11"
+# exec_always gsettings set org.gnome.desktop.interface cursor-theme "Adwaita"
+# exec_always gsettings set org.gnome.desktop.interface cursor-size "22"
 
 # Screenshot a window
 bindsym Print exec grim
 
+# Volume control
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 
-# floating rules
-# for_window [class="flameshot"] floating enable
+# Touchpad config
+input "1102:4639:DELL081C:00_044E:121F_Touchpad" {
+    dwt enabled
+    tap enabled
+    middle_emulation enabled
+    natural_scroll enabled
+}
 
+# Mouse config
+input "5426:156:Razer_Razer_DeathAdder_V2_X_HyperSpeed" {
+    accel_profile flat
+}
 
-# assign workspaces for apps
-# assign [class="TelegramDesktop"] $ws3
-# assign [class="Skype"] $ws6
-# assign [class="Nicotine"] $ws9
-# assign [class="Transmission-gtk"] $ws9
-# for_window [class="Spotify"] move container to workspace $ws10
+# Brightness control (needs brightnessctl)
+bindsym $mod+i exec --no-startup-id brightnessctl s 5%+
+bindsym $mod+o exec --no-startup-id brightnessctl s 5%-
 
+# Quickstart apps
+bindsym $mod+F1 exec --no-startup-id thunar
+bindsym $mod+F2 exec --no-startup-id google-chrome
+
+# Floating rules
+# for_window [class="pavucontrol"] floating enable
+# for_window [class="nm-connection-editor"] floating enable
+# for_window [class="lxappearance"] floating enable
+# for_window [class="blueman-manager"] floating enable
+
+# Assign workspaces for apps
+for_window [class="Spotify"] move container to workspace 10
+# assign [class="Skype"] workspace number 6
 
 #Hide title bar
 default_border pixel 2
-#smart_borders on
+
+# Disable borders when only 1 window opens
+smart_borders on
+
 # Border color
 client.focused "#bd93f9" "#bd93f9" "#ffffff" "#bd93f9"
 
-
-# for_window [tiling] border pixel 2
-
-#Gaps
+# Gaps between windows
 #gaps inner 8px
 #gaps outer 8px
 
+# Switch keyboard layout
 input * {
     xkb_layout "us,ru,ua"
     xkb_options "grp:win_space_toggle"
 }
-
 input <identifier> xkb_model "pc101"
 
 
@@ -251,23 +292,9 @@ bindsym --to-code $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 
-# Enable waybar
+# Enable waybar as default bar
 bar {
   swaybar_command waybar
 }
-
-# bar {
-#     position top
-#
-#     # When the status_command prints a new line to stdout, swaybar updates.
-#     # The default just shows the current date and time.
-#     status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-#
-#     colors {
-#         statusline #ffffff
-#         background #323232
-#         inactive_workspace #32323200 #32323200 #5c5c5c
-#     }
-# }
 
 include /etc/sway/config.d/*
